@@ -1,55 +1,19 @@
-# Example of Naive Bayes implemented from Scratch in Python
-import csv
-import random
-import math
+import train
+import data
+import classify
 
-def loadCsv(filename):
+class main
 
-
-def splitDataset(dataset, splitRatio):
-
-
-def separateByClass(dataset):
-
-
-def mean(numbers):
-
-
-def stdev(numbers):
+	def main():
+		filename = 'classifiedDocuments.txt'
+		splitRatio = 0.67
+		dataset = data.LoadFile(filename)
+		trainingSet, testSet = data.PrepareTrainTestData(dataset, splitRatio)
+		classes = data.ExtractClasses(dataset)
+		vocubulary, prior, condprob = train.TrainMultinomialNaiveBayes(classes, trainingSet)
+		testDocument = data.getDocument(testSet)
+		topClass, score = classify.ApplyMultinomialNaiveBayes(classes, vocubulary, prior, condprob, testDocument)
+		print("{0} belongs to {1} with a score of {2}").format(testDocument, topClass, score )
 
 
-def summarize(dataset):
-
-
-def summarizeByClass(dataset):
-
-
-def calculateProbability(x, mean, stdev):
-
-
-def calculateClassProbabilities(summaries, inputVector):
-
-			
-def predict(summaries, inputVector):
-
-
-def getPredictions(summaries, testSet):
-
-
-def getAccuracy(testSet, predictions):
-
-
-def main():
-	filename = 'pima-indians-diabetes.data.csv'
-	splitRatio = 0.67
-	dataset = loadCsv(filename)
-	trainingSet, testSet = splitDataset(dataset, splitRatio)
-	print('Split {0} rows into train={1} and test={2} rows').format(len(dataset), len(trainingSet), len(testSet))
-	# prepare model
-	summaries = summarizeByClass(trainingSet)
-	# test model
-	predictions = getPredictions(summaries, testSet)
-	accuracy = getAccuracy(testSet, predictions)
-	print('Accuracy: {0}%').format(accuracy)
-
-main()
+	main()
