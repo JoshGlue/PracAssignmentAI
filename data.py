@@ -51,6 +51,8 @@ class Data:
 		normalizedDocument = filter(None, normalizedDocument)
 		return normalizedDocument
 
+
+	#### MOET NOG GEIMPLEMENTEERD WORDEN ####
 	@staticmethod
 	def GetDocument(dataset):
 		#Pakt een willekeurige document uit de dataset.
