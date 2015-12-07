@@ -66,8 +66,8 @@ class Train:
 		return concatenatedText
 def main():
 	dataset =  Data.LoadFile('dataset.txt')
-	concatenatedText = Train.ConcatenateAllTextsOfDocsInClass(dataset, 'M')
-	print Train.ExtractVocabulary(dataset)
+	print Train.ExtractClasses(dataset)
+	print Train.CountNumberOfDocs(dataset)
 
 
 main()

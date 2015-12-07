@@ -1,7 +1,15 @@
 import re
 import random
-
+import os
 class Data:
+
+	@staticmethod
+	def CreateDataFile(directory):
+		with open('dataset.txt', 'w+') as file_:
+			for root, dirs, files in os.walk(directory):			
+				for file in files:
+					file_.write(os.path.join(root, file) + " " + os.path.basename(root) + "\n")
+
 
 	@staticmethod
 	def LoadFile(filename):
@@ -43,8 +51,8 @@ class Data:
 		normalizedDocument = filter(None, normalizedDocument)
 		return normalizedDocument
 
-		#Geeft een dictionary terug met het document en de klasse
-		#Waar het bij hoort
+	#Geeft een dictionary terug met het document en de klasse
+	#Waar het bij hoort
 	@staticmethod
 	def GetDocument(dataset):
 		alldocuments = []
@@ -57,20 +65,6 @@ class Data:
 		index =random.randint(0, len(alldocuments) -1)
 		return alldocuments[index]
 
-
-
-
-
-		#Pakt een willekeurige document uit de dataset.
-		return document
-def main():
-		dataset =  Data.LoadFile('dataset.txt')
-		print Data.GetDocument(dataset)
-	
-
-
-
-main()
 
 
 
