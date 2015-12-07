@@ -11,14 +11,13 @@ class tester:
         return end-start
 
     @staticmethod
-    def Accuracy(classes ,vocubulary, prior, condprob, documents):
+    def Accuracy(classes ,vocubulary, prior, condprob, dataset):
         # Voert ApplyMulitnomialNBC uit op een serie documenten, waarvan we de class kennen.
         # Er wordt geteld hoevaak de voorspelling overeenkomt met de echte waarde.
         # De teruggegeven waarde is een fractie tussen 0 en 1 die aangeeft welk deel van de keren de voorspelling correct was.
         correct = 0
-        for d in documents:
-            [topClass, score] = clas.ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, d)       
-            # wat is de exacte code voor de goede class eigenlijk?
-            if topClass == :
+        for data in dataset.values():
+            [topClass, score] = clas.ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, docs[0])       
+            if topClass == docs[1]:
                 correct += 1
         return correct/len(documents)

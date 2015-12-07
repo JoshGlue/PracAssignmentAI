@@ -1,6 +1,6 @@
 import math
 import numpy
-class classifier:
+class Classify:
         @staticmethod
         def ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, document):
         # De specificatie van Probabilistic Inference and Bayesian Classification (Blz. 20) van Rieks op den Akker
