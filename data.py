@@ -27,14 +27,6 @@ class Data:
 		return dataset
 
 
-	#### MOET NOG GEIMPLEMENTEERD WORDEN ####
-	@staticmethod
-	def PrepareTrainTestSet(dataset, ratio):
-		#Pakt de dataset en split deze op in traindata en testdata naar de ratio die gespecificeerd is.
-
-
-		return [trainingSet, testSet]
-
 
 	@staticmethod
 	def Normalize(document):
@@ -51,16 +43,29 @@ class Data:
 		normalizedDocument = filter(None, normalizedDocument)
 		return normalizedDocument
 
-
-	#### MOET NOG GEIMPLEMENTEERD WORDEN ####
+		#Geeft een dictionary terug met het document en de klasse
+		#Waar het bij hoort
 	@staticmethod
 	def GetDocument(dataset):
+		alldocuments = []
+		for c in dataset:
+			for d in dataset[c]:
+				document = {}
+				document['class'] = c
+				document['document'] = dataset[c][d]
+				alldocuments.append(document)
+		index =random.randint(0, len(alldocuments) -1)
+		return alldocuments[index]
+
+
+
+
+
 		#Pakt een willekeurige document uit de dataset.
 		return document
 def main():
-		 dataset =  Data.LoadFile('dataset.txt')
-		 print "hello"
-		 print dataset
+		dataset =  Data.LoadFile('dataset.txt')
+		print Data.GetDocument(dataset)
 	
 
 

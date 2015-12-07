@@ -1,17 +1,13 @@
-import train
-import data
-import classify
-
-class main
+from data import Data
+from train import Train
+class main:
 
 	def main():
-		filename = 'classifiedDocuments.txt'
-		splitRatio = 0.67
-		dataset = data.LoadFile(filename)
-		trainingSet, testSet = data.PrepareTrainTestData(dataset, splitRatio)
-		classes = data.ExtractClasses(dataset)
-		vocubulary, prior, condprob = train.TrainMultinomialNaiveBayes(classes, trainingSet)
-		testDocument = data.getDocument(testSet)
+		filename = 'dataset.txt'
+		dataset = Data.LoadFile(filename)
+		classes = Train.ExtractClasses(dataset)
+		vocubulary, prior, condprob = Train.TrainMultinomialNaiveBayes(classes, trainingSet)
+		testDocument = Data.getDocument(testSet)
 		topClass, score = classify.ApplyMultinomialNaiveBayes(classes, vocubulary, prior, condprob, testDocument)
 		print("{0} belongs to {1} with a score of {2}").format(testDocument, topClass, score )
 

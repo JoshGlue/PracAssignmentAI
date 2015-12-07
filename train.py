@@ -29,7 +29,7 @@ class Train:
 				nTokens = CountTokensOfTerm(concText, t)
 				for t2 in vocubulary:
 					nTokens2 += CountTokensOfTerm(conctext, t2)
-				condprob[t][c] = (nTokens + 1)/nTokens2 
+				condprob[t][c] = (nTokens + 1)/(nTokens2 + 1) 
 
 		return [vocubulary, prior, condprob]
 
