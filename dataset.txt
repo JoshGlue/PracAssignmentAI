@@ -1,0 +1,3 @@
+blogs/F/F-test1.txt F
+blogs/M/M-test25.txt M
+blogs/M/M-test28.txt M
