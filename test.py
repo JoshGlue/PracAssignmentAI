@@ -1,4 +1,4 @@
-import classify.classfier as clas
+import classify import Classify
 import time
 class tester:
     @staticmethod
@@ -17,7 +17,7 @@ class tester:
         # De teruggegeven waarde is een fractie tussen 0 en 1 die aangeeft welk deel van de keren de voorspelling correct was.
         correct = 0
         for data in dataset.values():
-            [topClass, score] = clas.ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, docs[0])       
+            [topClass, score] = Classify.ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, docs[0])       
             if topClass == docs[1]:
                 correct += 1
         return correct/len(documents)
