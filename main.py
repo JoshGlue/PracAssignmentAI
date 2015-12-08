@@ -19,7 +19,7 @@ class main:
 		print "Get Random Document..."
 		testDocument = Data.getDocument(testSet)
 		print "Applying NBC on Document..."
-		topClass, score = Classify.ApplyMultinomialNaiveBayes(classes, vocabulary, prior, condprob, testDocument)
+		topClass, score = Classify.ApplyMultinomialNaiveBayes(classes, vocabulary, prior, condprob, testDocument['document'])
 		print("{0} belongs to {1} with a score of {2}").format(testDocument, topClass, score )
 		
 	main()

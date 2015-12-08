@@ -1,5 +1,5 @@
+from __future__ import division
 from data import Data
-
 class Train:
 	@staticmethod
 	def ExtractVocabulary(dataset):
@@ -36,7 +36,6 @@ class Train:
 					condprob[t] = {}
 				nTokens = Train.CountTokensOfTerm(concText, t)
 				condprob[t][c] = (nTokens +1)/(nTokens2 +1)
-				print "condprob", t, c, ": ", condprob[t][c]
 
 		return [vocabulary, prior, condprob]
 
