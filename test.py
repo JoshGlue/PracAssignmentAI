@@ -1,6 +1,6 @@
 import classify import Classify
 import time
-class tester:
+class Test:
     @staticmethod
     def TimeMeasure(classes ,vocubulary, prior, condprob, document):
         # Neemt een tijdmeting voor en na het uitvoeren van ApplyMultinomialNBC om te kijken
