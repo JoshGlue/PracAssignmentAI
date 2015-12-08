@@ -25,7 +25,7 @@ class main:
 		print "Do A Time Measurement of the Application of the NBC..."
 		print Test.TimeMeasure(classes, vocabulary, prior, condprob, testDocument)
 		print "Applying NBC on Document..."
-		topClass, score = Classify.ApplyMultinomialNaiveBayes(classes, vocabulary, prior, condprob, testDocument)
+		topClass, score = Classify.ApplyMultinomialNaiveBayes(classes, vocabulary, prior, condprob, testDocument['document'])
 		print("{0} belongs to {1} with a score of {2}").format(testDocument, topClass, score )
 
 	main()
