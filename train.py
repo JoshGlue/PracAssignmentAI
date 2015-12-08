@@ -32,8 +32,10 @@ class Train:
 					nTokens2 += Train.CountTokensOfTerm(concText, t2)
 			print "Calculating nTokens"
 			for t in vocabulary:
+				if not t in condprob.keys():
+					condprob[t] = {}
 				nTokens = Train.CountTokensOfTerm(concText, t)
-				condprob[t][c] = (nTokens + 1)/(nTokens2 + 1)
+				condprob[t][c] = (nTokens +1)/(nTokens2 +1)
 				print "condprob", t, c, ": ", condprob[t][c]
 
 		return [vocabulary, prior, condprob]
