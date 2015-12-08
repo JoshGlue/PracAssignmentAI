@@ -45,7 +45,6 @@ class Train:
 			for t in vocabulary:
 				if not t in condprob.keys():
 					condprob[t] = {}
-#				nTokens = Train.CountTokensOfTerm(concText, t)
 				condprob[t][c] = (nTokens4.get(t,0)+1)/(T+V)
 #				print "condprob", t, c, ": ", condprob[t][c]
 			print "Finished Training Class", c
@@ -57,7 +56,6 @@ class Train:
 	def ExtractClasses(dataset):
 		#Herleid alle mogelijke klasses die in de dataset voorkomen.
 		return dataset.keys()
-
 	
 	@staticmethod
 	def CountNumberOfDocs(dataset):
@@ -71,11 +69,6 @@ class Train:
 	def CountDocsInClass(dataset, c):
 		# Telt het aantal documenten in een klasse
 		return  len(dataset[c])
-
-	@staticmethod
-	def CountTokensOfTerm(concatenatedText, term):
-		# Telt hoe vaak een woord voorkomt in de samengevoegde tekst.
-		return concatenatedText.count(term)
 
 	@staticmethod
 	def ConcatenateAllTextsOfDocsInClass(dataset, c):
