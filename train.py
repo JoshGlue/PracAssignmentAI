@@ -1,4 +1,7 @@
+from __future__ import division
 from data import Data
+from collections import Counter
+import time
 
 class Train:
 	@staticmethod
@@ -10,6 +13,7 @@ class Train:
 			for d in dataset[c]:
 				vocabulary.extend(dataset[c][d])
 		vocabulary = set(vocabulary)
+		vocabulary = filter( lambda w : len(w)<9 and len(w)>3, vocabulary)
 		return vocabulary
 
 	@staticmethod
@@ -22,22 +26,31 @@ class Train:
 		prior = {}
 		condprob = {}
 		for c in classes:
+			start = time.time()
 			print "Training Class", c
 			nDocsInClass = Train.CountDocsInClass(dataset, c)
 			prior[c] = nDocsInClass/numberofDocs
 			concText = Train.ConcatenateAllTextsOfDocsInClass(dataset, c)
-			nTokens2 = 0
-			print "Calculating nTokens2"
-			for t2 in vocabulary:
-					nTokens2 += Train.CountTokensOfTerm(concText, t2)
-			print "Calculating nTokens"
+			T = len(concText)
+			V = len(vocabulary)
+			print "Length of vocabulary is", V, "Words"
+			tempDict = Counter(concText)
+			nTokens4 = dict(tempDict)
+			print "Length of tempDict is", len(tempDict), "Key-Value Pairs"
+			for k in tempDict:
+				if k not in vocabulary:
+					del nTokens4[k]
+			print "Length of tokens4 is", len(nTokens4), "Key-Value Pairs"
+			print "Calculating Condtional Probabilities"
 			for t in vocabulary:
 				if not t in condprob.keys():
 					condprob[t] = {}
-				nTokens = Train.CountTokensOfTerm(concText, t)
-				condprob[t][c] = (nTokens +1)/(nTokens2 +1)
-				print "condprob", t, c, ": ", condprob[t][c]
-
+#				nTokens = Train.CountTokensOfTerm(concText, t)
+				condprob[t][c] = (nTokens4.get(t,0)+1)/(T+V)
+#				print "condprob", t, c, ": ", condprob[t][c]
+			print "Finished Training Class", c
+			end = time.time()
+			print "Training Class", c, "Took", end-start, "Seconds."
 		return [vocabulary, prior, condprob]
 
 	@staticmethod

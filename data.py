@@ -62,5 +62,5 @@ class Data:
 				document['class'] = c
 				document['document'] = dataset[c][d]
 				alldocuments.append(document)
-		index =random.randint(0, len(alldocuments) -1)
+		index = random.randint(0, len(alldocuments) -1)
 		return alldocuments[index]

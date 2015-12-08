@@ -1,17 +1,17 @@
 import math
-import numpy
 class Classify:
         @staticmethod
         def ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, document):
         # De specificatie van Probabilistic Inference and Bayesian Classification (Blz. 20) van Rieks op den Akker
         # moet hier geimplementeerd worden
-                W = ExtractTokensFromDoc(vocabulary, document)
-                for c in classes:
-                        score[c] = math.log(prior[c])
-                        for t in W:
-                                score[c] += math.log(condprob[t][c])
-                topClass = numpy.argmax(score)
-                return [topClass,score[topClass]]
+            score = {}
+            W = Classify.ExtractTokensFromDoc(vocabulary, document)
+            for c in classes:
+                score[c] = math.log(prior[c],2)
+                for t in W:
+                    score[c] += math.log(condprob[t][c],2)
+            topClass = max(score.keys(), key=(lambda k: score[k]))
+            return [topClass,score[topClass]]
 
         @staticmethod
         def ExtractTokensFromDoc(vocabulary, document):
