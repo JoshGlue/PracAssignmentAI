@@ -4,10 +4,10 @@ import os
 class Data:
 
 	@staticmethod
-	def CreateDataFile(directory):
-		with open('dataset.txt', 'w+') as file_:
-			for root, dirs, files in os.walk(directory):			
-				for file in files:
+	def CreateDataFile(directory, file):
+		with open(file, 'w+') as file_:
+			for root, dirs, files in os.walk(directory):
+				for file in files:					
 					file_.write(os.path.join(root, file) + " " + os.path.basename(root) + "\n")
 
 
@@ -64,12 +64,3 @@ class Data:
 				alldocuments.append(document)
 		index =random.randint(0, len(alldocuments) -1)
 		return alldocuments[index]
-
-
-
-
-
-
-
-
-

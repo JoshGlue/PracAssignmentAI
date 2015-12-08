@@ -3,35 +3,40 @@ from data import Data
 class Train:
 	@staticmethod
 	def ExtractVocabulary(dataset):
-		#Herleid de volledige vocubulary van alle woorden die voorkomen in de dataset
+		#Herleid de volledige vocabulary van alle woorden die voorkomen in de dataset
 
-		vocubulary = []
+		vocabulary = []
 		for c in dataset:
 			for d in dataset[c]:
-				vocubulary.extend(dataset[c][d])
-		vocubulary = set(vocubulary)
-		return vocubulary
+				vocabulary.extend(dataset[c][d])
+		vocabulary = set(vocabulary)
+		return vocabulary
 
 	@staticmethod
 	def TrainMultinomialNaiveBayes(classes, dataset):
 		# De specificatie van Probabilistic Inference and Bayesian Classification (Blz. 19) van Rieks op den Akker
 		# moet hier geimplementeerd worden
 
-		vocubulary = ExtractVocabulary(dataset)
-		numberofDocs = CountNumberOfDocs(dataset)
+		vocabulary = Train.ExtractVocabulary(dataset)
+		numberofDocs = Train.CountNumberOfDocs(dataset)
 		prior = {}
 		condprob = {}
 		for c in classes:
-			nDocsInClass = CountDocsInClass(dataset, c)
+			print "Training Class", c
+			nDocsInClass = Train.CountDocsInClass(dataset, c)
 			prior[c] = nDocsInClass/numberofDocs
-			concText = ConcatenateAllTextsOfDocsInClass(dataset, c)
-			for t in vocubulary:
-				nTokens = CountTokensOfTerm(concText, t)
-				for t2 in vocubulary:
-					nTokens2 += CountTokensOfTerm(conctext, t2)
-				condprob[t][c] = (nTokens + 1)/(nTokens2 + 1) 
+			concText = Train.ConcatenateAllTextsOfDocsInClass(dataset, c)
+			nTokens2 = 0
+			print "Calculating nTokens2"
+			for t2 in vocabulary:
+					nTokens2 += Train.CountTokensOfTerm(concText, t2)
+			print "Calculating nTokens"
+			for t in vocabulary:
+				nTokens = Train.CountTokensOfTerm(concText, t)
+				condprob[t][c] = (nTokens + 1)/(nTokens2 + 1)
+				print "condprob", t, c, ": ", condprob[t][c]
 
-		return [vocubulary, prior, condprob]
+		return [vocabulary, prior, condprob]
 
 	@staticmethod
 	def ExtractClasses(dataset):
@@ -64,10 +69,3 @@ class Train:
 		for d in dataset[c]:
 			concatenatedText.extend(dataset[c][d])
 		return concatenatedText
-def main():
-	dataset =  Data.LoadFile('dataset.txt')
-	print Train.ExtractClasses(dataset)
-	print Train.CountNumberOfDocs(dataset)
-
-
-main()

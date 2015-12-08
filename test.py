@@ -6,7 +6,7 @@ class Test:
         # Neemt een tijdmeting voor en na het uitvoeren van ApplyMultinomialNBC om te kijken
         # hoelang het duurt om deze uit te voeren op het gegeven document.
         start = time.time()
-        classify.classifier.ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, document)
+        classify.ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, document)
         end = time.time()
         return end-start
 

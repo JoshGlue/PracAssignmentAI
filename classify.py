@@ -2,10 +2,10 @@ import math
 import numpy
 class Classify:
         @staticmethod
-        def ApplyMultinomialNaiveBayes(classes ,vocubulary, prior, condprob, document):
+        def ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, document):
         # De specificatie van Probabilistic Inference and Bayesian Classification (Blz. 20) van Rieks op den Akker
         # moet hier geimplementeerd worden
-                W = ExtractTokensFromDoc(vocubulary, document)
+                W = ExtractTokensFromDoc(vocabulary, document)
                 for c in classes:
                         score[c] = math.log(prior[c])
                         for t in W:
@@ -16,7 +16,7 @@ class Classify:
         @staticmethod
         def ExtractTokensFromDoc(vocabulary, document):
                 # Geeft alle woorden terug die in het documenet voorkomt
-                W = [word for word in document if word in vocubulary]                
+                W = [word for word in document if word in vocabulary]                
                 return set(W)
 
 #def main():
