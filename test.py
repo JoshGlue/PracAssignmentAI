@@ -1,3 +1,4 @@
+from __future__ import division
 from classify import Classify
 import time
 
@@ -17,13 +18,21 @@ class Test:
         # Er wordt geteld hoevaak de voorspelling overeenkomt met de echte waarde.
         # De teruggegeven waarde is een fractie tussen 0 en 1 die aangeeft welk deel van de keren de voorspelling correct was.
         correct = 0
+        totaal = 0
+        count = 0
         for c in dataset:
+#            print len(dataset[c])
             for d in dataset[c]:
-                topClass = Classify.ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, dataset[c][d])       
-            if topClass == c:
-                correct += 1
-#        for data in dataset.values():
-#            topClass, score = Classify.ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, data[0])       
-#            if topClass == data[1]:
-#                correct += 1
-        return correct/len(dataset)
+#                print len(dataset[c][d])
+                if count == 0:
+                    topClass, score  = Classify.ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, dataset[c][d])       
+#                   print "this is ",topClass, "and this is",c,"."
+                    if topClass == c:
+                        correct += 1
+                    count = 1
+                    totaal += 1
+                else:
+                    count = 0
+        print "The length of the dataset is",len(dataset)
+        print "The amount of correct predictions are",correct
+        return correct/totaal
