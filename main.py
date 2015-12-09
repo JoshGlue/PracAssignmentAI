@@ -23,7 +23,7 @@ class main:
 		print "Get Random Document..."
 		testDocument = Data.GetDocument(testSet)
 		print "Do A Time Measurement of the Application of the NBC..."
-		print Test.TimeMeasure(classes, vocabulary, prior, condprob, testDocument)
+		print "The time is took to do a single application of the NBC on a document is", Test.TimeMeasure(classes, vocabulary, prior, condprob, testDocument), "seconds."
 		print "Applying NBC on Document..."
 		topClass, score = Classify.ApplyMultinomialNaiveBayes(classes, vocabulary, prior, condprob, testDocument['document'])
 		print("{0} belongs to {1} with a score of {2}").format(testDocument, topClass, score )
