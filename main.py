@@ -18,8 +18,8 @@ class main:
 		print "Training NBC..."
 		vocabulary, prior, condprob = Train.TrainMultinomialNaiveBayes(classes, trainingSet)
 		print "Testing Accuracy..."
-#		percentage = Test.Accuracy(classes ,vocabulary, prior, condprob, trainingSet)
-		#print "The percentage of correct predictions is ",percentage,"percent."
+		percentage = Test.Accuracy(classes ,vocabulary, prior, condprob, trainingSet)
+		print "The percentage of correct predictions is ",percentage,"percent."
 		print "Get Random Document..."
 		testDocument = Data.GetDocument(testSet)
 		print "Do A Time Measurement of the Application of the NBC..."

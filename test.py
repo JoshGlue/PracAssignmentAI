@@ -17,8 +17,13 @@ class Test:
         # Er wordt geteld hoevaak de voorspelling overeenkomt met de echte waarde.
         # De teruggegeven waarde is een fractie tussen 0 en 1 die aangeeft welk deel van de keren de voorspelling correct was.
         correct = 0
-        for data in dataset.values():
-            topClass, score = Classify.ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, data[0])       
-            if topClass == data[1]:
+        for c in dataset:
+            for d in dataset[c]:
+                topClass = Classify.ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, dataset[c][d])       
+            if topClass == c:
                 correct += 1
+#        for data in dataset.values():
+#            topClass, score = Classify.ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, data[0])       
+#            if topClass == data[1]:
+#                correct += 1
         return correct/len(dataset)
