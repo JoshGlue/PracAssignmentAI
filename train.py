@@ -1,6 +1,7 @@
 from __future__ import division
 from data import Data
 from collections import Counter
+import random
 import time
 
 class Train:
@@ -13,7 +14,9 @@ class Train:
 			for d in dataset[c]:
 				vocabulary.extend(dataset[c][d])
 		vocabulary = set(vocabulary)
-		vocabulary = filter( lambda w : len(w)<9 and len(w)>3, vocabulary)
+		vocabulary = filter( lambda w :  len(w)>3 and len(w) <11, vocabulary)
+		
+		vocabulary = random.sample(vocabulary, int(len(vocabulary) * 0.4))
 		return vocabulary
 
 	@staticmethod

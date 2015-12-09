@@ -22,14 +22,10 @@ class Test:
         count = 0
         for c in dataset:
             for d in dataset[c]:
-                if count == 0:
                     topClass, score  = Classify.ApplyMultinomialNaiveBayes(classes ,vocabulary, prior, condprob, dataset[c][d])       
                     if topClass == c:
                         correct += 1
-                    count = 1
                     totaal += 1
-                else:
-                    count = 0
-        print "The amount of total tested documents is",len(dataset)
+        print "The amount of total tested documents is",totaal
         print "The amount of correct predictions are",correct
         return correct/totaal
