@@ -17,22 +17,29 @@ class Application(Frame):
         self.testSet = Data.LoadFile("test.txt")
         print "Extracting Classes.."
         self.classes = Train.ExtractClasses(self.trainingSet)
+        print "Done."
 
     def train(self):
         print "Training NBC..."
         self.vocabulary, self.prior, self.condprob = Train.TrainMultinomialNaiveBayes(self.classes, self.trainingSet)
+        print "Done."
 
     def speed(self):
         testDocument = Data.GetDocument(self.testSet)
         print "The time is took to do a single application of the NBC on a document is", Test.TimeMeasure(self.classes, self.vocabulary, self.prior, self.condprob, testDocument), "seconds."
+        print "Done."
         
     def accuracyOnTrain(self):
-        percentage = Test.Accuracy(self.classes ,self.vocabulary, self.prior, self.condprob, self.dataSet)
+        print "Calculating Accuracy..."
+        percentage = Test.Accuracy(self.classes ,self.vocabulary, self.prior, self.condprob, self.trainingSet)
         print "The percentage of correct predictions is ",100*percentage,"percent."
+        print "Done."
 
     def accuracyOnTest(self):
+        print "Calculating Accuracy..."
         percentage = Test.Accuracy(self.classes, self.vocabulary, self.prior, self.condprob, self.testSet)
         print "The percentage of correct predictions is ",100*percentage,"percent."
+        print "Done."
         
     def switchToType(self,switchTo):
         if switchTo == 0:
@@ -64,9 +71,11 @@ class Application(Frame):
 
         Button(self.labelFrame2, text="Gather Data", command=lambda:self.data()).grid(row=10, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
         Button(self.labelFrame2, text="Train", command=lambda:self.train()).grid(row=11, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+        Button(self.labelFrame2, text="Save", command=lambda:self.train()).grid(row=11, column=1, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+        Button(self.labelFrame2, text="Load", command=lambda:self.train()).grid(row=11, column=2, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
         Button(self.labelFrame2, text="Test the speed", command=lambda:self.speed()).grid(row=12, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
-        Button(self.labelFrame2, text="Test the accuracy on the testset", command=lambda:self.accuracyOnTrain).grid(row=13, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
-        Button(self.labelFrame2, text="Test the accuracy on the dataset", command=lambda:self.accuracyOnTest).grid(row=14, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+        Button(self.labelFrame2, text="Test the accuracy on the testset", command=lambda:self.accuracyOnTest()).grid(row=13, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+        Button(self.labelFrame2, text="Test the accuracy on the dataset", command=lambda:self.accuracyOnTrain()).grid(row=14, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
