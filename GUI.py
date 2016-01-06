@@ -8,20 +8,19 @@ import pickle
 
 class Application(Frame):
 
+    def folder(self, path):
+        pathsplit = path.split('/')
+        return pathsplit[len(pathsplit) - 1]
+
     def data(self):
-        datasets = [{"trainSet": "mails-train", "testSet": "mails-test"}, {"trainSet": "blogs-train", "testSet": "blogs-test"}]
-        if self.CheckVar1.get() == 1:
-            dataset = datasets[0]
-        if self.CheckVar2.get() == 1:
-            dataset = datasets[1]
         print "Creating Train File..."
-        Data.CreateDataFile(dataset['trainSet'], dataset['trainSet'] + ".txt")
+        Data.CreateDataFile(self.trainDir, self.folder(self.trainDir) + ".txt")
         print "Initializing Train File..."
-        self.trainingSet = Data.LoadFile(dataset['trainSet'] + ".txt")
+        self.trainingSet = Data.LoadFile(self.folder(self.trainDir) + ".txt")
         print "Creating Test File..."
-        Data.CreateDataFile(dataset['testSet'], dataset['testSet'] + ".txt")
+        Data.CreateDataFile(self.testDir, self.folder(self.testDir) + ".txt")
         print "Initializing Test File..."
-        self.testSet = Data.LoadFile(dataset['testSet'] + ".txt")
+        self.testSet = Data.LoadFile(self.folder(self.testDir )+ ".txt")
         print "Extracting Classes.."
         self.classes = Train.ExtractClasses(self.trainingSet)
         print "Done."
@@ -38,14 +37,13 @@ class Application(Frame):
         print "The time is took to do a single application of the NBC on a document is", Test.TimeMeasure(self.classes, self.vocabulary, self.prior, self.condprob, testDocument['document']), "seconds."
         print "Done."
         
-    def accuracyOnTrain(self):
-        print "Calculating Accuracy..."
-        percentage = Test.Accuracy(self.classes ,self.vocabulary, self.prior, self.condprob, self.trainingSet)
-        print "The percentage of correct predictions is ",100*percentage,"percent."
-        print "Done."
 
     def accuracyOnTest(self):
         print "Calculating Accuracy..."
+        print "Creating Test File..."
+        Data.CreateDataFile(self.testDir, self.folder(self.testDir) + ".txt")
+        print "Initializing Test File..."
+        self.testSet = Data.LoadFile(self.folder(self.testDir)+ ".txt")
         percentage = Test.Accuracy(self.classes, self.vocabulary, self.prior, self.condprob, self.testSet)
         print "The percentage of correct predictions is ",100*percentage,"percent."
         print "Done."
@@ -103,15 +101,32 @@ class Application(Frame):
         print "This document belongs to", topClass
         print "Done."
         f.close() # `()` was missing.
+
+    def trainDirectory(self):
+        trainDir = askdirectory()
+        if trainDir:
+            self.trainDir = trainDir
+            print self.trainDir, "selected as training directory"
+
+    def testDirectory(self):
+        testDir = askdirectory()
+        if testDir:
+            self.testDir = testDir
+            print self.testDir, "selected as test directory"
+
        
 
     def createWidgets(self):
-        self.labelFrame = LabelFrame(root,width=400,height=100, text="Enter Type:")
+        self.labelFrame = LabelFrame(root,width=400,height=100, text="Directories")
         self.labelFrame.grid_propagate(False)
         self.labelFrame.grid(row=1, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
 
-        Checkbutton(self.labelFrame,text="E-mails",variable=self.CheckVar1,command=lambda:self.switchToType(0)).grid(row=0, column=0,sticky="W")
-        Checkbutton(self.labelFrame,text="Blogs"  ,variable=self.CheckVar2,command=lambda:self.switchToType(1)).grid(row=1, column=0,sticky="W")
+        #Checkbutton(self.labelFrame,text="E-mails",variable=self.CheckVar1,command=lambda:self.switchToType(0)).grid(row=0, column=0,sticky="W")
+        #Checkbutton(self.labelFrame,text="Blogs"  ,variable=self.CheckVar2,command=lambda:self.switchToType(1)).grid(row=1, column=0,sticky="W")
+        Button(self.labelFrame, text="Choose Train Directory", command=lambda:self.trainDirectory()).grid(row=11, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+        Button(self.labelFrame, text="Choose Test Directory", command=lambda:self.testDirectory()).grid(row=11, column=1, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+
+
 
         self.labelFrame2 = LabelFrame(root,width=400,height=250, text="Operations:")
         self.labelFrame2.grid_propagate(False)
@@ -152,7 +167,7 @@ class Application(Frame):
         self.createWidgets()
         
 root = Tk()
-root.title("Multinomal Naive Bayesian Classifier")
+root.title("Multinomal Naive Bayesian Classifier Group 48")
 root.geometry(("420x530"))
 app = Application(master=root)
 app.mainloop()

@@ -29,16 +29,14 @@ Our Interactive learner is based on documents that are provided by Blackboard. T
 
 So the directory structure corresponds to what kind of document it is and to what class it belongs to. To add new documents to the classes, you just need to copy and paste a document in the correct directory.
 
-Train data and test data
-The train data that we provide are in blogs-train, respectively mails-train and the test data is located in blogs-test and mails-test.
 
 
 GUI
 Our GUI is a user friendly interface to execute basic functions of our application. 
 It consists of one window and the output of the actions will be shown in the terminal or command line. The actions that can be done are selecting different types of documents, train the classifier, load a pretrained classifier, test the speed of the Interactive Learner and Apply the classifier on a single document. The documents that can be selected are of the kind of mails and blogs (provided by the AI blackboard Page).
 
-Select Type
-These checkboxes need to be checked if the correct type of document is checked.
+Directories
+Here you can specify where the directories are where the training and test data is situated
 
 Train Classifier
 This button will train the classifier based on the documents that are provided in the train directory. When a document is added, changed or removed, the training needs to be run again. After the training of the classifier has finished, a dialog will pop up where you can store the classifier if you want to.
