@@ -116,9 +116,8 @@ class Application(Frame):
         self.labelFrame2 = LabelFrame(root,width=400,height=250, text="Operations:")
         self.labelFrame2.grid_propagate(False)
         self.labelFrame2.grid(row=4, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
-
-        Button(self.labelFrame2, text="Train on train data", command=lambda:self.train()).grid(row=11, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
-        Button(self.labelFrame2, text="Load pretrained file", command=lambda:self.load()).grid(row=12, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+        Button(self.labelFrame2, text="Train Classifier", command=lambda:self.train()).grid(row=11, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
+        Button(self.labelFrame2, text="Load Pretrained Classifier", command=lambda:self.load()).grid(row=12, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
         Button(self.labelFrame2, text="Test the speed", command=lambda:self.speed()).grid(row=13, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
         Button(self.labelFrame2, text="Test the accuracy on the test set", command=lambda:self.accuracyOnTest()).grid(row=14, column=0, sticky='W', padx=5, pady=5, ipadx=5, ipady=5)
 

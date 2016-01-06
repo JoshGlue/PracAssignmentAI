@@ -6,13 +6,13 @@ class main:
 
 	def main():
 		print "Creating Train File..."
-		Data.CreateDataFile("train", "train.txt")
+		Data.CreateDataFile("mails-train", "mails-train.txt")
 		print "Initializing Train File..."
-		trainingSet = Data.LoadFile("train.txt")
+		trainingSet = Data.LoadFile("mails-train.txt")
 		print "Creating Test File..."
-		Data.CreateDataFile("test", "test.txt")
+		Data.CreateDataFile("mails-test", "mails-test.txt")
 		print "Initializing Test File..."
-		testSet = Data.LoadFile("test.txt")
+		testSet = Data.LoadFile("mails-test.txt")
 		print "Extracting Classes.."
 		classes = Train.ExtractClasses(trainingSet)
 		print "Training NBC..."
